@@ -1,0 +1,145 @@
+<style type="text/css">
+	.krug{
+		width: 100px; 
+		height: 100px;
+		background: red;
+		border-radius: 100%;
+		position: absolute;
+		transition: 1s	;
+	}
+	.shrift{
+		text-align: center;
+		font-weight: 900;
+		font-family: arial;
+		font-size: 60;
+	}
+
+</style>
+
+
+
+<!-- <button class="btn1">Сделай зеленым</button>
+<button class="btn2">Сделай синим</button>
+<div style="height: 300px; width: 300px; background: red;" class="box"></div>
+ -->
+<h1 class="shrift"> Время:<span class="text1 shrift"> 10</span></h1>
+<h1 class="shrift"> Очки:<span class="text2 shrift"> 0</span></h1>
+<h1 style="margin-top: 200px ; font-size: 60; text-align: center ; font-weight: 900; font-family: arial; "> Собери все шарики за 10 секунд!!!</h1>
+<div class="krug big" style="top: 100px; left: 250px;"></div>
+<div class="krug big" style="top: 200px; left: 900px;"></div>
+<div class="krug big" style="top: 600px; left: 100px;"></div>
+<div class="krug big" style="top: 800px; left: 500px;"></div>
+
+<div class="krug left" style="top: 50px; left: 150px;"></div>
+<div class="krug left" style="top: 350px; left: 1100px;"></div>
+<div class="krug left" style="top: 400px; left: 250px;"></div>
+
+
+<div class="krug small" style="top: 700px; left: 200px;"></div>
+<div class="krug small" style="top: 850px; left: 100px;"></div>
+<div class="krug small" style="top: 850px; left: 1590px;"></div>
+
+<div class="krug vniz" style="top: 300px; left: 2000px;"></div>
+<div class="krug vniz" style="top: 400px; left: 1600px;"></div>
+
+<script type ="text/javascript">
+	// let btn1 = document.querySelector(".btn1");
+	// let	btn2 = document.querySelector(".btn2");
+	// let box_e1 = document.querySelector(".box");
+
+	// btn1.onclick = function(){
+	// 	div("green", "brown", "20px")
+	// }
+	// btn2.onclick =  function(){
+	// 	div("blue", "black", "10px")
+	// }
+
+	// function div(color, colorBorder, borderRadius){
+	// 	box_e1.style.borderRadius = borderRadius;
+	// 	box_e1.style.border = "3px solid "+colorBorder;
+	// 	box_e1.style.background = color;
+
+
+	// }
+
+	let count = 10;
+	let timer;
+	timer = setInterval(show, 1000);
+	let bigs = document.querySelectorAll(".big");
+	let sizekal = 100;
+	let krugs = document.querySelectorAll(".krug");
+	let points = document.querySelector(".text2");
+	let ochki = 0;
+	let lefts = document.querySelectorAll(".left");
+	let x = 100;
+	let sizesmall = 100;
+	let sizesmallinterval;
+	let small = document.querySelectorAll(".small");
+	let vniz = document.querySelectorAll(".vniz");
+	let y = 100;
+	let RRight = setInterval(toRight, 1000);
+
+
+
+	//время
+	function show() {
+		count = count-1; 
+		document.querySelector(".text1").innerHTML = count;
+		if (count == 0){
+			clearInterval(timer)
+			if (ochki == 12){
+				alert("Ты победил!");
+			}
+			if (count == 0){
+				alert("Ты проиграл((");
+			}
+			clearInterval(size);
+			clearInterval(nizhe);
+			clearInterval(sizesmallinterval);
+			clearInterval(RRight);
+		}
+	}
+	function toRight() {
+		x= x+100;
+		for(let i = 0; i < lefts.length; i++){
+			lefts[i].style.left = x+"px";
+		}
+	}
+	let size;
+	size = setInterval(bigger, 1000);
+
+	function toBottom() {
+		y = y+75;
+		for(let i = 0; i < vniz.length; i++){
+			vniz[i].style.top= y+"px";
+		}
+	}
+		let nizhe;
+		nizhe = setInterval(toBottom, 1000);
+
+	function bigger (){
+		sizekal = sizekal +20;
+		for(let i = 0; i < bigs.length; i++){
+			bigs[i].style.width = sizekal +"px";
+			bigs[i].style.height = sizekal +"px";
+		}
+	}
+	function smaller() {
+		sizesmall = sizesmall -10;
+		for(let i = 0; i < small.length; i++){
+			small[i].style.width = sizesmall +"px";
+			small[i].style.height = sizesmall +"px";
+
+		}
+	}
+	sizesmallinterval = setInterval(smaller, 1000);
+	//нажатие на все круги
+	for(let i = 0; i<krugs.length; i++){
+		krugs[i].onclick = function () {
+			krugs[i].style.display = "none";
+			ochki = ochki + 1;
+			points.innerHTML = ochki;}
+	}
+
+	
+</script>
